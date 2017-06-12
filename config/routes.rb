@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :articles 
+  resources :articles do
+    resources :comments, only: [:new, :create, :edit, :update, :destroy]
+  end
   
-  post 'articles/:id' => 'articles#destroy'
   root 'articles#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
