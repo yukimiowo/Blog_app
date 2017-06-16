@@ -1,12 +1,14 @@
 class CommentsController < ApplicationController
     
+    before_action :set_article, only: [:new, :create, :edit, :update, :destroy]
+    before_action :set_comment, only: [:edit, :update, :destroy]
+    
+    
     def new
-        @article = Article.find(params[:article_id])
         @comment = Comment.new(article_id: :article_id)
     end
     
     def create 
-        @article = Article.find(params[:article_id])
         @comment = @article.comments.new(comment_params)
         if @comment.save
             redirect_to article_path(@article.id)
@@ -16,13 +18,9 @@ class CommentsController < ApplicationController
     end
     
     def edit
-        @article = Article.find(params[:article_id])
-        @comment = Comment.find(params[:id])
     end
     
     def update
-        @article = Article.find(params[:article_id])
-        @comment = Comment.find(params[:id])
         if @comment.update(comment_params)
             redirect_to article_path(@article.id)
         else
@@ -31,8 +29,6 @@ class CommentsController < ApplicationController
     end
     
     def destroy
-        @article = Article.find(params[:article_id])
-        @comment = Comment.find(params[:id])
         @comment.destroy
         redirect_to article_path(@article.id)
     end
@@ -40,9 +36,17 @@ class CommentsController < ApplicationController
     
     private
     
-    def comment_params
-        params[:comment].permit(:content)
-    end
+        def comment_params
+            params[:comment].permit(:content)
+        end
+        
+        def set_article
+            @article = Article.find(params[:article_id])
+        end
+        
+        def set_comment
+            @comment = Comment.find(params[:id])
+        end
     
     
 end

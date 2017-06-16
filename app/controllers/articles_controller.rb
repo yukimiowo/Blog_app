@@ -41,13 +41,13 @@ class ArticlesController < ApplicationController
     
     private
     
-    def article_params
-        params[:article].permit(:title, :content)
-    end
-    
-    def set_article
-        @article = Article.find(params[:id])
-    end
+        def article_params
+            params[:article].permit(:title, :content)
+        end
+        
+        def set_article
+            @article = Article.find(params[:id])
+        end
 
 end
 
