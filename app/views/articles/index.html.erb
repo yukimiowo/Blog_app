@@ -1,0 +1,11 @@
+<ul>
+    <% @articles.each do |article| %>
+    <li>
+        <%= link_to article.title, article_path(article.id) %>
+        <%= link_to "[記事の編集]", edit_article_path(article.id) %>
+        <%= link_to "[記事の削除]", article_path(article.id), method: :delete, data: { confirm: "are you sure?" } %>
+    </li>
+    <% end %>
+</ul>
+
+<%= link_to "新しい記事の作成", new_article_path %>
