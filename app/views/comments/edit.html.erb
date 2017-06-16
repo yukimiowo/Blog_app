@@ -9,7 +9,9 @@
     <%= f.text_area :content %><br>
     
     <% if @comment.errors.any? %>
-    <%= @comment.errors.messages[:content][0] %>
+    <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
     <% end %>
 </p>
 

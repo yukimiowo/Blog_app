@@ -7,8 +7,9 @@
     <%= f.text_area :content %><br>
     
     <% if @article.errors.any? %>
-    <%= @article.errors.messages[:title][0] %><br>
-    <%= @article.errors.messages[:content][0] %>
+    <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
     <% end %>
 </p>
 
